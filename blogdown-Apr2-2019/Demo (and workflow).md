@@ -47,3 +47,12 @@ Themes
 public (output files)
 
 static (images)
+
+
+
+
+
+deploy site 
+
+https://app.netlify.com/sites/upbeat-wing-a719f5/overview
+
