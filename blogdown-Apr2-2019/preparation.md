@@ -28,15 +28,41 @@ https://slides.yihui.name/2018-blogdown-rstudio-conf-Yihui-Xie.html#7
 
 https://slides.yihui.name/2017-DSM-rmarkdown-Yihui-Xie.html#1
 
-
-
-
+https://resources.rstudio.com/wistia-rstudio-conf-2018-2/create-and-maintain-websites-with-r-markdown-and-blogdown-yihui-xie-2 (Rstudio conf 2018)
 
 ### meetup talk examples 
 
 https://github.com/rladies/meetup-presentations_oslo/blob/master/topic_model/Rladies_TM_031218.pdf
 
 
+
+
+
+### starter tutorials (blogs and slides)
+
+https://alison.rbind.io/slides/blogdown-workshop-slides.html?utm_content=buffer7ad34&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer#101 by Alison Hill, and her blog 
+
+https://rladies-melb-blogdown.netlify.com/#1 by Emi Tanaka 
+
+
+
+
+
+### more advanced material 
+
+Alison Hill's spoonful series
+
+https://alison.rbind.io/post/2019-02-21-hugo-page-bundles/ page bundles 
+
+https://alison.rbind.io/post/2019-02-19-hugo-netlify-toml/ netlify.toml file 
+
+http://lcolladotor.github.io/2018/03/08/blogdown-archetype-template/#.XG_tbC2ZPNY (copy all after # ) archetype (template)
+
+http://amber.rbind.io/blog/2016/12/19/creatingsite/#github by Amber Thomas
+
+
+
+https://github.com/DASpringate/samatha a package 
 
 # 2. Details of each section
 
@@ -53,14 +79,6 @@ academic **resume** (hence the academic theme)
 ## technical part 
 
 *use a mindnode to link all these together !including the site structure!*
-
- 
-
-### Yihui's original talk on blogdown 
-
-https://resources.rstudio.com/wistia-rstudio-conf-2018-2/create-and-maintain-websites-with-r-markdown-and-blogdown-yihui-xie-2
-
-
 
 
 
@@ -92,9 +110,9 @@ will markdown save us?
 
 free, open source, easy to install, fast. general purpose and not just for blogs
 
+https://alison.rbind.io/post/2019-02-19-hugo-netlify-toml/ 
 
-
-
+https://lmyint.github.io/post/hugo-academic-tips/ tips for using academic theme 
 
 
 
