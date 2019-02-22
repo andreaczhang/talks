@@ -66,11 +66,13 @@ create a new repo, initialise with README but no .gitignore.
 
 
 
-### what to delete?
+### <u>investigate: what to delete?</u> 
+
+Config.toml: don't touch. instead, modify greatly. 
+
+#### content (our focus, since it has home, content, etc)
 
 assume your working directory is `bd-demo`. 
-
-#### content (markdown or yaml? strange format)
 
 - Author: I have deleted it. 
 
@@ -79,40 +81,81 @@ assume your working directory is `bd-demo`.
   - `post.md` and others, you can choose. 
 - Post
   - `_index.md` yaml, title 
-  - it's not enough to delete just one folder here. also need to delte from `public/post/folder`. 
+  - it's not enough to delete just one folder here. also need to delte from `public/post/folder`.  (maybe not)
+
+
+
+#### static 
+
+need to save images there. 
+
+#### Resources: don't touch
+
+#### Public: don't touch 
+
+#### Themes: don't touch
+
+
+
+### Homepage: what appears? 
+
+by selecting `active = true` in the corresponding files under `/home`, this widget will appear. 
+
+`config.toml` allows you to control the look, including changing the portrait photo. 
 
 
 
 
 
-### distinguish the `index.Rmd`s. 
 
-`bd-demo/index.Rmd` doesn't give you much info. Just leave it there. 
 
 
 
 ## 4.  New posts 
 
-`new post` addin. 
+### distinguish the `index.Rmd`s. 
+
+`bd-demo/index.Rmd` doesn't give you much info. Just leave it there. 
+
+YAML header!!
+
+### method 1: use `new post` addin. 
+
+### method 2: directly create markdown / R markdown posts
+
+
 
 ### draft posts
 
 add `draft: TRUE` in YAML front matter. 
 
-
-
-### markdown posts
-
+the first lines between `+++` and `+++` are YAML front matter (?) or --- ---? 
 
 
 
+### images 
 
-### R markdown posts
+the only working way I have tried is from Alison Hill:
+
+- add image to `/static/img/` folder, then reference in the blogpost using `![pic](/img/pic.jpg)`. The ONLY one that worked. 
 
 
 
 ## 5. Deploy
 
+Remember that you need to push to github!!! 
+
+1. go to netlify, use GitHub account 
+2. (follow my steps) and get a random domain name 
+
+
+
+### `*rbind.io` domain names 
+
+offered by Rstudio 
+
+1. go to bind/support page, open a new issue 
+2. give them netlify subdomain name , and want it to be the new one 
 
 
 
@@ -120,6 +163,6 @@ add `draft: TRUE` in YAML front matter.
 
 
 
+# Issues:
 
-
-
+1. problem rendering images using addin. and feature. 
