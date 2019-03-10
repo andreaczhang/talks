@@ -1,39 +1,34 @@
-# My blog post for this topic 
+# Overwhelmed by Hugo academic theme: a beginner's guide
 
-The minimum steps you need to build your own website
+Experience of using R blogdown to build my webpage
 
-## 1. Background reading 
 
-- I am using Alison Presmanes Hill (co-author of the book)'s tutorial https://alison.rbind.io/post/up-and-running-with-blogdown/#in-github. 
-- Amber Thomas http://amber.rbind.io/blog/2016/12/19/creatingsite/ 
-- Danielle Navarro's post: you can delete bravely. https://djnavarro.net/post/2018-04-27-starting-blogdown/
+
+I feel like writing down and summarize my very own experience of creating a blog using R blogdown created by Yihui Xie. I already got the page started in December 2018 and I thought "yay! my first blog!" and have decided to share my experience at my local R meet up, however I have been busy, either traveling or working on my PhD. Now it is the time that I commit myself this Sunday afternoon to start! 
 
 
 
 
 
-## 2. My set up 
+## Readings
 
-MacOS, R (version) and RStudio (version?), GitHub 
-
-
-
-A few ways to deploy, I choose Netlify and free subdomain *.rbind.io. 
+To get started, I have followed [Alison Presmanes Hill's tutorial](https://alison.rbind.io/post/up-and-running-with-blogdown/#in-github). She is a co-author of the [blogdown: Creating websites with R Markdown](https://bookdown.org/yihui/blogdown/) book, and I recommend reading other posts she has written in the same blog. 
 
 
 
-## 3. First timer 
-
-### 3.1 Github
-
-create a new repo, initialise with README but no .gitignore. 
-
-- use Netlify and rbind: name repo anything you want (chosen)
-- host as GitHub Page: name `yourgithubusername.github.io` 
 
 
 
-### 3.2 RStudio 
+
+## Quick start
+
+Thanks to Alison's great tutorial, the following steps worked out just perfectly. Here's a short summary: 
+
+### 1. Github
+
+I have create a new repo, initialise with README but no .gitignore. I choose to use [Netlify](https://www.netlify.com) and [Rbind](https://github.com/rbind) because it's super simple, and I can name a repository anything I want. Moreoeve I feel more connected with my fellow R users!  
+
+### 2. RStudio 
 
 1. install blogdown 
 
@@ -50,119 +45,107 @@ create a new repo, initialise with README but no .gitignore.
 
 3. start new project using version control. Use `Serve site` add in. 
 
-4. build (and select theme)
+4. build. Like many others, I use the theme `academic`. 
 
    ```R
    blogdown::new_site(theme = 'gcushen/hugo-academic', theme_example = T)
    ```
 
-   then delete the example content if you wish. 
+5. add/commit/push changes to github when I'm done writing.
 
-   use `save` instead of `knit`. 
 
-5. add/commit/push changes to github. 
 
 
 
 
 
-### <u>investigate: what to delete?</u> 
+## Overwhelmed by academic: where to start with?  
 
-Config.toml: don't touch. instead, modify greatly. 
+So far so good. The academic theme [example](https://academic-demo.netlify.com) however seem overwhelming to a newbie in her career - I don't have so many things to put up! Therefore it becomes a must to modify the existing files. And to do that, I need to understand the structure of the site. 
 
-#### content (our focus, since it has home, content, etc)
+It is not easy. After reading [Danielle Navarro](https://djnavarro.net/post/2018-04-27-starting-blogdown/)'s post, and *bravely* deleted many folders, I have found some general rules. Assume your current directory is `bd-demo`. 
 
-assume your working directory is `bd-demo`. 
 
-- Author: I have deleted it. 
 
-- Home: this should give you info on what widgets to appear on your homepage. 
-  -  `about.md`: this is about/ biography widget. you can choose to alter the title 
-  - `post.md` and others, you can choose. 
-- Post
-  - `_index.md` yaml, title 
-  - it's not enough to delete just one folder here. also need to delte from `public/post/folder`.  (maybe not)
+### Homepage
 
+Probably this is what we all care the most: what appears on our homepage, and how to control it? There are 2 things you can do. 
 
+1. the file `config.toml` allows you to control the look, change the title of your homepage, including changing the portrait photo - so it is important obviously. It can be difficult to understand everything in the default example, so I changed the things I could understand `baseurl, title, email, address` etc. 
 
-#### static 
+2. change photo (TODO)
 
-need to save images there. 
+3. Widgets, controled by corresponding files under `content/home`, allow me to modify what to appear on my homepage in addition to `config.toml`, such as `about.md` that is the first paragarph. By selecting `active = true` in the corresponding markdown files, this widget will appear. 
 
-#### Resources: don't touch
+   
 
-#### Public: don't touch 
 
-#### Themes: don't touch
 
+### Content folder 
 
+As the name suggests, it has the content of my site. However I don't need all of them, either because I don't have enough material, or because some are not necessary. Therefore in the end I only kept 4 folders: 
 
-### Homepage: what appears? 
+1. Home: this should give you info on what **widgets** to appear on your homepage. 
 
-by selecting `active = true` in the corresponding files under `/home`, this widget will appear. 
+2. Post
+3. project 
+4. publication 
 
-`config.toml` allows you to control the look, including changing the portrait photo. 
 
 
+#### Post: understand the structure
 
+The biggest challenge when I opened the folders in the demo folder is **naming** of various files, and it has made the modification very difficult because it's hard to know what you're actually modifying. Here is an example about what I'm talking about. 
 
+When I look at `content` folder, there are 4 things that seem relevant for posts: 
 
+1. `content/home/posts.md`: since it's under `home/`, it means it's a file to control the widget on the homepage. So it doesn't affect your post material.  
+2. `content/post/_index.md`: a YAML header. *I don't know why I need it, maybe I dont?*
+3. `content/post/post_name.Rmd` or md: the actual post content. This is what you need to write! 
+4. `content/post/some_folder/gallery/index.md`. *I don't know*. 
 
 
 
+#### Create new posts
 
-## 4.  New posts 
+It is easy to create new posts, 
 
-### distinguish the `index.Rmd`s. 
+1. use `new_post` add-in. 
+2. directly create .md files. 
 
-`bd-demo/index.Rmd` doesn't give you much info. Just leave it there. 
+It is possible to make your post a draft by setting `draft: TRUE` in YAML front matter (the first lines between `+++` and `+++`). 
 
-YAML header!!
 
-### method 1: use `new post` addin. 
 
-### method 2: directly create markdown / R markdown posts
+### Images and static folder
 
+It is a bit confusing to add pictures, and `insert image` couldn't work for me. The only working way I have tried is from Alison Hill's post: 
 
+- add image to `/static/img/` folder, then reference in the blogpost using `![pic_name](/img/pic_name.jpg)`
 
-### draft posts
+- *new trial: use `<img src = "/post/my-1st-blogpost/featured.jpg", width = "850", height = "400">` to manually set the html file. However this involves public folder which I don't want to touch...*
 
-add `draft: TRUE` in YAML front matter. 
+  
 
-the first lines between `+++` and `+++` are YAML front matter (?) or --- ---? 
 
 
+### A few do-not-touch's
 
-### images 
+Resources folder, public folder, themes folder. 
 
-the only working way I have tried is from Alison Hill:
 
-- add image to `/static/img/` folder, then reference in the blogpost using `![pic](/img/pic.jpg)`. The ONLY one that worked. 
 
 
 
-## 5. Deploy
+## Deployment 
 
-Remember that you need to push to github!!! 
+**Remember that you need to push to github!!!** 
 
-1. go to netlify, use GitHub account 
-2. (follow my steps) and get a random domain name 
+I followed Alison's tips completely and it works fine. To sum up, 
 
+1. go to [Netlify](https://www.netlify.com), register using your GitHub account.
+2. select the GitHub repo which contains the site.
+3. Deploy (and be assigned a random domain name), and change your domain name as you wish. 
+4. go to [Rbind](https://github.com/rbind), open a new issue, and give them your Netlify domain name and want it to be the new one. The Rbind support team will do everything from there. 
 
 
-### `*rbind.io` domain names 
-
-offered by Rstudio 
-
-1. go to bind/support page, open a new issue 
-2. give them netlify subdomain name , and want it to be the new one 
-
-
-
-
-
-
-
-# Issues:
-
-1. problem rendering images using addin. and feature. 

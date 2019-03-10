@@ -100,6 +100,18 @@ will markdown save us?
 
 #### pandoc 
 
+a markdown engine (hugo's is blackfriday) 
+
+### configurations 
+
+`config.toml` file. Different for each theme. 
+
+single bracket [social] represents a table
+
+double bracket [[menu.main]] indicate array of tables. 
+
+
+
 #### Yaml header parameters: say about author etc 
 
 
@@ -108,7 +120,15 @@ will markdown save us?
 
 ### HUGO
 
+Static site: web server sends exactly the same content to web browser no matter who visits the web pages, doesn't depend on conditions. Deployment here means to copy static files to a server. 
+
+dynamic site: uses PHP (for example). each user has a profile page
+
 free, open source, easy to install, fast. general purpose and not just for blogs
+
+Reasons why blogdown chooses Hugo: fast, and active community. 
+
+However: Hugo doesn't support R markdown, so we can't generate results using R code on your webpage because you can only use static Markdown documents. 
 
 https://alison.rbind.io/post/2019-02-19-hugo-netlify-toml/ 
 
