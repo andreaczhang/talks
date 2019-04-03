@@ -4,17 +4,19 @@ Experience of using R blogdown to build my webpage
 
 
 
-I feel like writing down and summarize my very own experience of creating a blog using R blogdown created by Yihui Xie. I already got the page started in December 2018 and I thought "yay! my first blog!" and have decided to share my experience at my local R meet up, however I have been busy, either traveling or working on my PhD. Now it is the time that I commit myself this Sunday afternoon to start! 
+I feel like writing down and summarize my very own experience of creating a blog using R blogdown created by Yihui Xie. I already got the page started in December 2018 and I thought and have decided to share my experience at my local [Oslo useR! Group](https://www.meetup.com/Oslo-useR-Group/), however I have been busy, either traveling or working on my project. Now it is the time that I commit myself this Sunday afternoon to start! 
 
+#### Why am I writing this post? 
 
+Yes, there are already many posts on how to get you started. However I haven't seen one that explains what I should do when suddenly tons of information came at me right after clicking `build_site()` button, using [Academic](https://sourcethemes.com/academic/) theme. I would like to share my experience on how I found my way to modify relevant files and folders, to make the site look like what I want. I will add materials when I have learnt some new tricks! 
 
 
 
 ## Readings
 
-To get started, I have followed [Alison Presmanes Hill's tutorial](https://alison.rbind.io/post/up-and-running-with-blogdown/#in-github). She is a co-author of the [blogdown: Creating websites with R Markdown](https://bookdown.org/yihui/blogdown/) book, and I recommend reading other posts she has written in the same blog. 
+To get started, I have followed [Alison Presmanes Hill's tutorial](https://alison.rbind.io/post/up-and-running-with-blogdown/#in-github). She is a co-author of the [blogdown: Creating websites with R Markdown](https://bookdown.org/yihui/blogdown/) book, and I recommend reading other posts (for example, [A spoonful of Hugo series](https://alison.rbind.io/post/2019-02-19-hugo-archetypes/)) she has written in the same blog. 
 
-
+The [blogdown book](https://bookdown.org/yihui/blogdown/) is a great manual when you want to look up something. I also recommend going to twitter discussion to keep update. 
 
 
 
@@ -43,7 +45,7 @@ I have create a new repo, initialise with README but no .gitignore. I choose to 
    blogdown::install_hugo()
    ```
 
-3. start new project using version control. Use `Serve site` add in. 
+3. start new project using version control. Use `Serve site` add in will allow you to see the rendered site locally whenever you save the changes made to your files. 
 
 4. build. Like many others, I use the theme `academic`. 
 
@@ -61,48 +63,42 @@ I have create a new repo, initialise with README but no .gitignore. I choose to 
 
 ## Overwhelmed by academic: where to start with?  
 
-So far so good. The academic theme [example](https://academic-demo.netlify.com) however seem overwhelming to a newbie in her career - I don't have so many things to put up! Therefore it becomes a must to modify the existing files. And to do that, I need to understand the structure of the site. 
+So far so good. The academic theme [example](https://academic-demo.netlify.com) however seem overwhelming to a newbie in her career - I don't have so many things to put up! Therefore it becomes a must to modify the existing files. I need to understand the structure of the site. 
 
-It is not easy. After reading [Danielle Navarro](https://djnavarro.net/post/2018-04-27-starting-blogdown/)'s post, and *bravely* deleted many folders, I have found some general rules. Assume your current directory is `bd-demo`. 
-
-
-
-### Homepage
-
-Probably this is what we all care the most: what appears on our homepage, and how to control it? There are 2 things you can do. 
-
-1. the file `config.toml` allows you to control the look, change the title of your homepage, including changing the portrait photo - so it is important obviously. It can be difficult to understand everything in the default example, so I changed the things I could understand `baseurl, title, email, address` etc. 
-
-2. change photo (TODO)
-
-3. Widgets, controled by corresponding files under `content/home`, allow me to modify what to appear on my homepage in addition to `config.toml`, such as `about.md` that is the first paragarph. By selecting `active = true` in the corresponding markdown files, this widget will appear. 
-
-   
+It is not easy. After reading [Danielle Navarro](https://djnavarro.net/post/2018-04-27-starting-blogdown/)'s post, and *bravely* deleted many folders, I have found some general rules. Assume your current directory is `bd-demo` (`bd` for blogdown). 
 
 
 
-### Content folder 
+### 1. Homepage
 
-As the name suggests, it has the content of my site. However I don't need all of them, either because I don't have enough material, or because some are not necessary. Therefore in the end I only kept 4 folders: 
+Probably this is what we all care the most: what appears on our homepage, and how to control it. There are 3 things you can do. 
 
-1. Home: this should give you info on what **widgets** to appear on your homepage. 
+1.  `config.toml` allows you to control the configuration and look. You can change the title of your homepage,  changing the portrait photo, configure whether you want to display math formulae etc. It can be challenging to understand everything in the default example, so I changed the things those look obvious: `baseurl, title, email, address` and social media information. A very good thing `config.toml` does is the nice documentation, it contains various links that you can check out. 
+2. To change photo or `avatar`, it is also explained in the `config.toml` file. You save a picture, say `pic.jpg` in the  `static/img/` folder and specify the name in configuration file. 
+3. Widgets, or the sections displayed in the homepage are controled by corresponding files under `content/home` in addition to  In addition to `config.toml`. For example, the content of the first paragraph that appears on my homepage is in `content/home/about.md`. By selecting `active = true` in the YAML header in the corresponding markdown files, this widget will appear.
 
-2. Post
-3. project 
-4. publication 
+As for my site, I don't need all the default sections. What I did was to go to `content/` and delete most of them, until I have 4 folders left, and they will appear on my homepage. 
+
+- home
+- post
+- project
+- publication
+
+You can add as many as you want at a later point. 
 
 
 
-#### Post: understand the structure
+### 2. Post
 
-The biggest challenge when I opened the folders in the demo folder is **naming** of various files, and it has made the modification very difficult because it's hard to know what you're actually modifying. Here is an example about what I'm talking about. 
+#### Understand the content folder structure
 
-When I look at `content` folder, there are 4 things that seem relevant for posts: 
+The biggest challenge when I opened the folders in the demo folder is **naming** of various files. It has made the modification very difficult because it's hard to know and remember what you're actually modifying. Here is an example about what I'm talking about. 
+
+When I look at `content` folder, there are a few things that seem relevant for posts: 
 
 1. `content/home/posts.md`: since it's under `home/`, it means it's a file to control the widget on the homepage. So it doesn't affect your post material.  
-2. `content/post/_index.md`: a YAML header. *I don't know why I need it, maybe I dont?*
+2. `content/post/_index.md`: a YAML header. I decided to leave it there.
 3. `content/post/post_name.Rmd` or md: the actual post content. This is what you need to write! 
-4. `content/post/some_folder/gallery/index.md`. *I don't know*. 
 
 
 
@@ -111,27 +107,28 @@ When I look at `content` folder, there are 4 things that seem relevant for posts
 It is easy to create new posts, 
 
 1. use `new_post` add-in. 
-2. directly create .md files. 
+2. directly create markdown or R markdown files under `content/post/`. I tend to use this approach. 
 
-It is possible to make your post a draft by setting `draft: TRUE` in YAML front matter (the first lines between `+++` and `+++`). 
+It is possible to make your post a draft by setting `draft: TRUE` in YAML front matter (the first lines between `+++` and `+++`). This is particularly useful if you have something in mind but don't want to post it just yet. The draft posts will appear when you view your site locally, but not online. 
+
+If you have math-rich posts, remember to set `math = true` in the `config.toml`! 
 
 
 
-### Images and static folder
+### 3. Images and static folder
 
-It is a bit confusing to add pictures, and `insert image` couldn't work for me. The only working way I have tried is from Alison Hill's post: 
+It is a bit confusing to add pictures, and `insert image` add-in couldn't work for me. The only working way I have tried is from Alison Hill's post: 
 
 - add image to `/static/img/` folder, then reference in the blogpost using `![pic_name](/img/pic_name.jpg)`
-
-- *new trial: use `<img src = "/post/my-1st-blogpost/featured.jpg", width = "850", height = "400">` to manually set the html file. However this involves public folder which I don't want to touch...*
 
   
 
 
 
+
 ### A few do-not-touch's
 
-Resources folder, public folder, themes folder. 
+Resources folder, public folder, themes folder. Public folder will regenerate when you `serve_site()`. 
 
 
 
@@ -139,7 +136,7 @@ Resources folder, public folder, themes folder.
 
 ## Deployment 
 
-**Remember that you need to push to github!!!** 
+**After modifications, remember to save and push to github!!!** 
 
 I followed Alison's tips completely and it works fine. To sum up, 
 
