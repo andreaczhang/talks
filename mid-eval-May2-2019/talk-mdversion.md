@@ -24,7 +24,7 @@ Interveneable predictions of hospital acquired infection via a hierarchical lass
 
 ### Paper 2
 
-Patient phenotyping via coupled tensor factorization
+Feature learning on heterogenous temporal EHR data 
 
 ### Further works 
 
@@ -34,39 +34,42 @@ Patient phenotyping via coupled tensor factorization
 
 # Progress
 
-(context between the papers)
+### Paper 1 
+
+- Simulation, (most part of) manuscript done 
+- Need a real data example to be complete 
+
+### Paper 2
+
+- Started: Feb 2019 (3 months in)
+- Open data, preparation work done
+- Concept: formed
+- Analysis: started on small sample
 
 
 
-
+Time remaining: 1 year 3 months
 
 ---
 
 # Paper 1 
 
 
+Interveneable predictions of hospital acquired infection via a hierarchical lasso procedure using Electronic Health Records
 
-### Background and Motivation:
+### Motivation:
 
-- Make use of Electronic Health Records to improve hospital management
-- A model for HAI on a certain day in the future 
-
+- a framework based on an interpretable model to predict an outcome, tradeoff between interpretabilitty and predictivity
 
 
-- Outcome: HAI (patients with pneumonia, urinary tract infection, etc)
-- Data type: 
+- Outcome: HAI on a certain day in the future 
+  - patients with pneumonia, urinary tract infection, etc
+  
+- Data type: time series predictors and response  
   - Lab tests: positive results, high white blood cell count, … 
   - Patient Characteristics: BMI, fever, ...
   - Procedures and medication: antibiotics, vasopressor drugs, ...
   - Staff: specialist nurses, working overtime, ...
-
-
-
-### Objective: 
-
-- a framework based on an interpretable model to predict an outcome
-- time series predictors and response 
-- Tradeoff: interterpretability vs predictivity
 
 
 
@@ -104,14 +107,6 @@ $$\tilde{y}^{(t)} =  \sum_{k = 1}^{K} \hat{\phi}^{(k)}  y^{(t-k)} + \sum_{j = 1}
 
 
 
-
-
-
-
-
-
----
-
 ### Intervention
 
 
@@ -130,6 +125,23 @@ Data: MIMIC-III Critical Care Database (Medical Information Mart for Intensive C
 
 
 
+
+
+
+
+
+
+
+
 ---
 
 # Further works 
+
+
+
+
+
+
+
+
+

@@ -25,37 +25,51 @@ Interveneable predictions of hospital acquired infection via a hierarchical lass
 
 ### Paper 2
 
-Patient phenotyping via coupled tensor factorization
+Feature learning on heterogeneous temporal EHR data 
 
-### Further works 
-
-
-
----
-
-# Progress
-
-(context between the papers)
-
-
+### Future works 
 
 
 
 ---
 
-# Paper 1 
+# Progress overview
+
+### Paper 1 
+
+- Simulation, (most part of) manuscript done 
+- Need a real data example to be complete 
+
+
+### Paper 2
+
+- Started: Feb 2019 (3 months in)
+- Open data, preparation work done
+- Concept: formed
+- Analysis: started on small sample
+
+<br>
+
+Time remaining: 1 year 3 months
 
 
 
-### Background and Motivation:
 
-- Make use of Electronic Health Records to improve hospital management
-- A model for HAI on a certain day in the future 
+---
+
+## Paper 1 
+
+Interveneable predictions of hospital acquired infection via a hierarchical lasso procedure using Electronic Health Records
+
+### Motivation:
+
+- a framework based on an interpretable model to predict an outcome, tradeoff between interpretabilitty and predictivity
 
 
-
-- Outcome: HAI (patients with pneumonia, urinary tract infection, etc)
-- Data type: 
+- Outcome: HAI on a certain day in the future 
+  - patients with pneumonia, urinary tract infection, etc
+  
+- Data type: time series predictors and response  
   - Lab tests: positive results, high white blood cell count, … 
   - Patient Characteristics: BMI, fever, ...
   - Procedures and medication: antibiotics, vasopressor drugs, ...
@@ -63,21 +77,14 @@ Patient phenotyping via coupled tensor factorization
 
 
 
-### Objective: 
-
-- a framework based on an interpretable model to predict an outcome
-- time series predictors and response 
-- Tradeoff: interterpretability vs predictivity
-
-
 
 
 
 ---
 
 
-
 ### 2 steps approach
+<br>
 
 #### step 1: variable selection
 
@@ -91,6 +98,7 @@ $$\hat{y}^{(t)} = \sum_{j = 1}^{p}  \sum_{l = 0}^{L} \hat{\beta}_j^{(l)}  x_j^{(
 
 ---
 
+
 #### step 2: prediction improvement
 
 refit on residuals and historical lags of the response to improve prediction
@@ -98,12 +106,10 @@ refit on residuals and historical lags of the response to improve prediction
 Denote the residuals as $r^{(t)} = y^{(t)} - \hat{y}^{(t)}$
 
 $$\tilde{y}^{(t)} =  \sum_{k = 1}^{K} \hat{\phi}^{(k)}  y^{(t-k)} + \sum_{j = 1}^{p}  \sum_{l = 0}^{L} \hat{\beta}_j^{(l)}  x_j^{(t-l)}$$
-
-
-
----
-
+<br>
 ### Intervention
+
+Change the value of certain variables at time $t$.
 
 
 
@@ -117,10 +123,55 @@ $$\tilde{y}^{(t)} =  \sum_{k = 1}^{K} \hat{\phi}^{(k)}  y^{(t-k)} + \sum_{j = 1}
 
 # Paper 2
 
+Feature learning on heterogeneous temporal EHR data 
+
+### Background
 Data: MIMIC-III Critical Care Database (Medical Information Mart for Intensive Care III)
+
+
+Challenges of EHR data
+
+- heterogeneity: multiple sources; unstructured text/numeric measurements
+- unequal length
+- unevenly sampled 
+
+Representatiton learning via 
+
+- SAX: symbolic aggregate approximation
+- Dynamic time warping: time series similarity
+- Tensor decomposition: extract patient latent feature for classification task
+
 
 
 
 ---
 
-# Further works 
+# Plan for future works 
+
+#### Paper 2 (priority)
+- finish implementing our method on small cohort
+
+- compare with other method (i.e. LSTM Autoencoder by Suresh2018 paper)
+
+<br>
+#### Paper 1
+
+
+
+#### Paper 3
+
+(some of my interests: )
+- open dataset: eICU (50 centers)
+- continue feature learning, patient phenotyping and tensor 
+- privacy preserving ML for EHR data
+- software development from paper 2
+
+
+
+
+
+
+
+
+
+
