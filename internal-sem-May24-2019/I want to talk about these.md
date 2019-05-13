@@ -3,19 +3,59 @@
 > - Need examples: the audience are statisticians. They speak a different language.
 > - use example! 
 
+<span style = 'color:royalblue'>To read</span>
+
+### Outline: (25 min)
+
+1. EHR data and challenges (8min)  <span style = 'color:royalblue'>To read</span>
+   - EHR data 
+   - open data: MIMIC, eICU
+   - Challenges 
+2. feature learning and application in medicine (5min) <span style = 'color:royalblue'>To read</span>
+   - Feature/ representation learning: aim, methods, importance, difference from statistics modelling  
+   - application in medicine <span style = 'color:tomato'>(why the audience should care about it)</span>
+   - application in EHR
+3. detailed description of target dataset (1min)
+4. 2 representation methods for **phenotyping** and classification
+   - deep methods (3 min)
+   - our methods (8 min)
 
 
-# Topic 1: MIMIC data and the challenge
+
+#### Take home message: 
+
+- EHR data is challenging 
+- representation learning is important
 
 
 
+## Topic 1: EHR data and the challenge (8 min)
 
+
+
+### EHR data
+
+
+
+### open EHR data
+
+
+
+### challenges 
 
 … so there are these challenges, what can we do? 
 
 Natural solution:
 
-# Topic 2: feature/representation learning 
+
+
+
+
+## Topic 2: feature learning and application in medicine (5min)
+
+### Feature/ representation learning
+
+aim, methods, importance, difference from statistics modelling
 
 key questitons to address: 
 
@@ -31,13 +71,15 @@ What is an example of a representation?
 
 - PCA: one of the earliest linear feature learning algorithm.  <span style = 'color:royalblue'>Important! try to relate it to why it is widely used, to use principle components in regression</span>
 
-
-
 Zhong2016, bengio2013
 
+### in medicine (not only EHR)
 
 
-## EHR feature learning
+
+
+
+### EHR feature learning
 
 now go back to look at our data: what can we use? NLP is one, but that is not what we will focus on. 
 
@@ -53,7 +95,7 @@ introduction of this field (maybe with the help of this thesis I have found)
 
 
 
-# Topic 3: our method 
+## Topic 3: detailed description of target dataset (1min)
 
 
 
@@ -61,11 +103,15 @@ introduction of this field (maybe with the help of this thesis I have found)
 
 
 
-# Topic 4: LSTM AE (Suresh 2018)
+## Topic 4: 2 representation methods and applications in phenotyping and classification
 
 
 
+### Deep methods (3 min)
 
+
+
+### Our methods (8 min)
 
 
 
