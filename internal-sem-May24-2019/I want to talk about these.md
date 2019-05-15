@@ -3,7 +3,15 @@
 > - Need examples: the audience are statisticians. They speak a different language.
 > - use example! 
 
-<span style = 'color:royalblue'>To read</span>
+### <span style = 'color:royalblue'>Abstract</span>
+
+Electronic health records are the routinely generated data by machines and medical staff from medical institutes, and contain important information regarding patient stays such as demographics, medications and diagnoses, vitals and so on. Despite of being multi-modal  (numeric measurements, free texts, images), EHR data is challenging for traditional statistical methods to analyse also for its irregularity: measurements for different features are sampled at different frequency over time, and total measurements can vary greatly across different patients. 
+
+This talk will introduce feature learning and its application in healthcare research and EHR in particular. We will take an open dataset, the MIMIC III database and investigate how different feature learning methods (Autoencoder and dynamic time warping) can be used to tackle the problem of irregularity. 
+
+
+
+
 
 ### Outline: (25 min)
 
