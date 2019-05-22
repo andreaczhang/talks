@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Electronic Health Record data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Chi Zhang" />
+    <link href="libs/remark-css/hygge.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Electronic Health Record data
+## opportunities, challenges and feature learning
+### Chi Zhang
+### 2019-05-22, internal seminar @ OCBE
+
+---
+
+class: middle
+
+
+
+
+
+
+
+
+# Outline
+
+### EHR data and challenges 
+
+### Feature learning and application in EHR 
+
+### 2 methods for MIMIC III data
+#### 1. LSTM autoencoder
+#### 2. Tensor decomposition 
+
+
+---
+
+# Electronic Health Records
+
+Routinely generated patient data by: 
+- bed side monitors, clinicians, lab tests 
+
+&lt;img src="./img/img2.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+- More specialised (less common): images
+
+
+- Initially used for billing and administrative purposes: not for research! 
+
+
+
+
+---
+class: middle
+
+# Who benefits from EHR research?
+
+#### Patients 
+- disease progression prediction / early detection
+  - e.g. Heart failure, 
+  - in-hospital mortality, 
+  - disease stage
+
+#### Medical professionals 
+- improve diagnosis
+  - image evaluation
+- automate routine process
+  - risk score 
+  
+#### Institution: hospitals 
+- cost reduction 
+- privacy protection 
+  
+
+
+
+
+
+
+ 
+---
+
+# Research topics
+
+&lt;img src="./img/imgTopics.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+
+
+
+
+---
+# Challenge 1: Avalibility 
+
+&lt;img src="./img/imgChallenge0.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+#### Privacy protection
+- no data at all
+- or: brutal anonymisation
+
+
+
+
+
+
+---
+# Solution: MIMIC III data
+
+### ICU data 
+Pros: relatively complete
+
+  - demographics, vital sign measurements, lab test results, 
+  - procedures, medications, imaging reports
+  - notes 
+  
+Cons: severely ill, multiple diagnosis within one same subject
+
+### MIMIC III - Medical Information Mart for Internsive Care
+- Critical care units, Beth Israel Deaconess Medical Center (Boston, US), 2001-2012 
+- over 50,000 records for 30,000+ patients 
+- De-identification: randomised time stamp 
+
+
+
+
+---
+Static data (table **admissions**)
+&lt;img src="./img/imgMimic1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+Dynamic data (table ** chartevents **)
+&lt;img src="./img/imgMimic2.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+Information scattering around: 26 such tables, possibly large (330 million rows in ** chartevents **)
+
+---
+### Connect PostgreSQL Database with R 
+
+
+```r
+library(RPostgreSQL)
+drv &lt;- dbDriver("PostgreSQL")        # PostgreSQL driver
+con &lt;- dbConnect(drv, 
+                 dbname = "mimicbig",    # database name
+                 host = "localhost", 
+                 port = 5432,
+                 user = "chizhang", 
+                 password = pw)
+query &lt;- 'SELECT * FROM admissions WHERE subject_id = 10006'
+record &lt;- dbGetQuery(con, statement = query)
+```
+
+#### Comments:
+
+Know what information you need;
+
+Partition large tables for speed.
+
+---
+# Challenge 2: data quality
+
+Usability 
+- various systems even within one hospital
+
+
+Lack of 'golden standard' diagnosis
+
+Missingness
+- at random?
+- not at random? 
+
+
+
+---
+# Challenge 3: Multi-modality
+
+Numeric measurements
+
+Categorical information: diagnosis code, ethnicity
+
+Free text
+
+Time stamp 
+
+Images and signals: ECG waveforms
+
+Genomic information 
+
+
+---
+# Challenge 4: Irregularity (length)
+
+Unequal length of measurements 
+
+From a few hours to a few thousand hours 
+
+(graph of distribution )
+
+---
+# Challenge 5: Irregularity (frequency)
+
+Various sampling frequency 
+- High: Electrocardiogram (ECG) (suffers from artifact corruption)
+- Medium: vitals, input, output
+- Low: lab tests, clinical notes (done by order)
+- Static: demographics, diagnosis
+
+(graph (heatmap? missing values?))
+
+
+
+
+---
+# Feature / Representation learning 
+
+Feature: a characteristic that helps with the modeling.
+
+Feature / Representation learning: techniques that make it easier to extract information when building predictive models 
+
+### Motivations
+- Feature **Engineering** vs **Learning** 
+
+- Dimension reduction (*PCA*)
+  - visualization (clustering, e.g. *K-means*)
+  - memory saving (in the early days, e.g. *symbolic aggregation*)
+
+- Precictive performance (? *Lasso*, *Autoencoder, RNN*)
+  
+- Capture pattern from multiple modes such as time (*tensor*)
+
+
+
+---
+### Example 1: Autoencoder 
+
+Non probablistic, direct encoding: parametric map from input to representation
+
+**Encoder**: `\(h = f_\theta (x) = s_f (b + Wx)\)` 
+
+**Decoder**: `\(g_\theta (h) = s_g (d + Wx)\)`
+
+Minimise **reconstruction** error: `\(L(x, g_\theta (f_\theta(x)))\)`
+
+&lt;img src="./img/imgAE.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+---
+### Example 2: Tensor decomposition 
+
+Tensor: multi-dimensional array 
+- order 0: scalar
+- order 1: vector 
+- order 2: matrix
+- order 3: cube 
+
+(explain what is decomp and how it can be used as representation)
+
+
+
+
+---
+### Tensor decomp: application in computational phenotyping 
+
+
+
+
+
+
+
+---
+## Representation: Evaluation
+
+What is a good representation? 
+
+cite (Bengio 2014)
+
+Simple: 
+
+- Representation themselves
+  - understand structure of data, such as visualisation 
+  
+- Prediction / classification performances
+
+
+
+
+---
+# Back to MIMIC III data
+
+Recall data characteristics: 
+- Temporal
+- Unevenly sampled, unequal length
+
+Objective: **predict in-hospital mortality**
+
+Pre-requisite: patient representation 
+
+Options
+
+1. LSTM AE (use Suresh 2018 paper for example)
+
+2. Our attempt: similarity tensor decomposition 
+
+&lt;br&gt;
+.full-width[.content-box-yellow[Backstory: we were inspired by Suresh 2018 study, hence the objective and choice of inputs]]
+
+---
+## Long short term memory Autoencoder (LSTM AE)
+(insert pic from suresh 2018 paper)
+
+Key idea: 
+- LSTM (complicated, once use Keras it's impossible to understand)
+- has some phenotyping ideas (link to a few other AE phenotyping paper)
+
+Choice of inputs: 
+
+
+#### Implementation: 
+
+keras + Gaussian mixture model (scikit learn)
+
+#### Performance
+
+
+---
+## Similarity tensor decomposition  
+(! testing stage! )
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
