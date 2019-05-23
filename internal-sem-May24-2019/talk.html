@@ -180,7 +180,6 @@ Partition large tables for speed.
 - Undesired alteration in data due to technical reasons
 - e.g. accidental removal of sensor
 
---
 
 **Inconsistency and duplications**
 - Various database systems within one hospital
@@ -279,14 +278,14 @@ Feature: a characteristic that helps with the modeling.
 
 --
 
-### Motivations
+#### Motivations
 - Feature **Engineering** vs **Learning** 
 
 - Dimension reduction (*PCA*)
   - visualization (clustering, e.g. *K-means*)
   - memory saving (in the early days, e.g. *symbolic aggregation*)
 
-- Precictive performance (*Lasso*, *Autoencoder, RNN*)
+- Predictive performance (*Lasso*, *Autoencoder, RNN*)
   
 - Capture pattern from multiple modes such as time (*tensor*)
 
@@ -320,7 +319,7 @@ Tensor: multi-dimensional array
 - order 2: matrix
 - order 3: cube 
 
-
+--
 
 ### CP: CANDECOMP/PARAFAC 
 Express a tensor into a sum of finite number of rank-one tensors (i.e. can be written by the outer product of `\(N\)` vectors)
@@ -458,7 +457,7 @@ Trying out 2 things:
 
   - Dimension reduction 
 
-
+--
 **Dynamic Time Warping** 
 
   - similarity measure for time series data
@@ -467,6 +466,20 @@ Trying out 2 things:
 
 
 &lt;img src="./img/imgDTW.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+---
+## Future plans 
+
+Investigate different configurations
+
+Test predictive performance
+
+Compare with Suresh 2018 study
+
+...
+--
+
+&lt;img src="./img/imgclosing3.png" width="100%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

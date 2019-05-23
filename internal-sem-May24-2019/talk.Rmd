@@ -191,7 +191,6 @@ Partition large tables for speed.
 - Undesired alteration in data due to technical reasons
 - e.g. accidental removal of sensor
 
---
 
 **Inconsistency and duplications**
 - Various database systems within one hospital
@@ -290,14 +289,14 @@ Feature: a characteristic that helps with the modeling.
 
 --
 
-### Motivations
+#### Motivations
 - Feature **Engineering** vs **Learning** 
 
 - Dimension reduction (*PCA*)
   - visualization (clustering, e.g. *K-means*)
   - memory saving (in the early days, e.g. *symbolic aggregation*)
 
-- Precictive performance (*Lasso*, *Autoencoder, RNN*)
+- Predictive performance (*Lasso*, *Autoencoder, RNN*)
   
 - Capture pattern from multiple modes such as time (*tensor*)
 
@@ -333,7 +332,7 @@ Tensor: multi-dimensional array
 - order 2: matrix
 - order 3: cube 
 
-
+--
 
 ### CP: CANDECOMP/PARAFAC 
 Express a tensor into a sum of finite number of rank-one tensors (i.e. can be written by the outer product of $N$ vectors)
@@ -485,7 +484,7 @@ Trying out 2 things:
 
   - Dimension reduction 
 
-
+--
 **Dynamic Time Warping** 
 
   - similarity measure for time series data
@@ -496,5 +495,27 @@ Trying out 2 things:
 ```{r echo = F, out.width='40%', fig.align='center'}
 knitr::include_graphics('./img/imgDTW.png')
 ```
+
+---
+## Future plans 
+
+Investigate different configurations
+
+Test predictive performance
+
+Compare with Suresh 2018 study
+
+...
+--
+
+```{r echo = F, out.width='100%', fig.align='center'}
+knitr::include_graphics('./img/imgclosing3.png')
+```
+
+
+
+
+
+
 
 
