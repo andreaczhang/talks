@@ -14,13 +14,11 @@ class: center, middle, inverse, title-slide
 # Electronic Health Record data
 ## opportunities, challenges and feature learning
 ### Chi Zhang
-### 2019-05-22, internal seminar @ OCBE
+### 2019-05-23, internal seminar @ OCBE
 
 ---
 
 class: middle
-
-
 
 
 
@@ -38,39 +36,42 @@ class: middle
 #### 2. Tensor decomposition 
 
 
+
 ---
 
 # Electronic Health Records
 
-Routinely generated patient data by: 
-- bed side monitors, clinicians, lab tests 
+Initially used for billing and administrative purposes
+
+Routinely generated patient data from: 
+- bed side monitors, lab tests 
 
 &lt;img src="./img/img2.png" width="90%" style="display: block; margin: auto;" /&gt;
 
-- More specialised (less common): images
+- More specialised: images such as waveforms
 
+- Administration: demographics
 
-- Initially used for billing and administrative purposes: not for research! 
+---
+#### Clinical notes 
 
-
-
+&lt;img src="./img/img1.jpg" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: middle
 
 # Who benefits from EHR research?
-
 #### Patients 
 - disease progression prediction / early detection
-  - e.g. Heart failure, 
-  - in-hospital mortality, 
-  - disease stage
+  - e.g. heart failure, &lt;span style = 'color:maroon'&gt;(Choi 2016)&lt;/span&gt;
+  - in-hospital mortality, &lt;span style = 'color:maroon'&gt;(Suresh 2018)&lt;/span&gt;
+  - Parkinson's disease stage &lt;span style = 'color:maroon'&gt;(Che 2017)&lt;/span&gt;
 
 #### Medical professionals 
-- improve diagnosis
-  - image evaluation
+- automate diagnosis
+  - image evaluation: detect hip fracture from X-ray &lt;span style = 'color:maroon'&gt;(Gale 2017)&lt;/span&gt;
 - automate routine process
-  - risk score 
+  - summarize content from medical records &lt;span style = 'color:maroon'&gt;(McCoy 2018)&lt;/span&gt; 
   
 #### Institution: hospitals 
 - cost reduction 
@@ -85,7 +86,9 @@ class: middle
  
 ---
 
-# Research topics
+## Research topics
+
+Number of Google Scholar publications relating to **deep EHR** until 2017 &lt;span style = 'color:maroon'&gt;(Shickel 2018 Survey)&lt;/span&gt;
 
 &lt;img src="./img/imgTopics.png" width="70%" style="display: block; margin: auto;" /&gt;
 
@@ -98,13 +101,15 @@ class: middle
 
 
 ---
-# Challenge 1: Avalibility 
+# Challenge 1: Avalability 
 
 &lt;img src="./img/imgChallenge0.png" width="70%" style="display: block; margin: auto;" /&gt;
 
+--
 #### Privacy protection
 - no data at all
-- or: brutal anonymisation
+
+- or: 'brutal' anonymisation
 
 
 
@@ -112,7 +117,7 @@ class: middle
 
 
 ---
-# Solution: MIMIC III data
+# Lifesaver: MIMIC III data
 
 ### ICU data 
 Pros: relatively complete
@@ -123,7 +128,8 @@ Pros: relatively complete
   
 Cons: severely ill, multiple diagnosis within one same subject
 
-### MIMIC III - Medical Information Mart for Internsive Care
+--
+### MIMIC III - Medical Information Mart for Intensive Care
 - Critical care units, Beth Israel Deaconess Medical Center (Boston, US), 2001-2012 
 - over 50,000 records for 30,000+ patients 
 - De-identification: randomised time stamp 
@@ -135,10 +141,11 @@ Cons: severely ill, multiple diagnosis within one same subject
 Static data (table **admissions**)
 &lt;img src="./img/imgMimic1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
+--
 Dynamic data (table ** chartevents **)
 &lt;img src="./img/imgMimic2.png" width="70%" style="display: block; margin: auto;" /&gt;
 
-
+--
 Information scattering around: 26 such tables, possibly large (330 million rows in ** chartevents **)
 
 ---
@@ -158,6 +165,7 @@ query &lt;- 'SELECT * FROM admissions WHERE subject_id = 10006'
 record &lt;- dbGetQuery(con, statement = query)
 ```
 
+-- 
 #### Comments:
 
 Know what information you need;
@@ -167,17 +175,28 @@ Partition large tables for speed.
 ---
 # Challenge 2: data quality
 
-Usability 
-- various systems even within one hospital
+**Digital artifact corruption**
+
+- Undesired alteration in data due to technical reasons
+- e.g. accidental removal of sensor
+
+--
+
+**Inconsistency and duplications**
+- Various database systems within one hospital
+- Example 1: Carevue and Metavision within MIMIC III, 2 sets of item IDs
+- Example 2: measurement recorded by different staff into different systems
 
 
-Lack of 'golden standard' diagnosis
 
-Missingness
+**Missingness**
 - at random?
 - not at random? 
 
 
+
+**lack of labels**
+Makes predictive models hard
 
 ---
 # Challenge 3: Multi-modality
@@ -198,22 +217,55 @@ Genomic information
 ---
 # Challenge 4: Irregularity (length)
 
-Unequal length of measurements 
+Unequal length of measurements: from a few hours to a few thousand hours 
 
-From a few hours to a few thousand hours 
 
-(graph of distribution )
+```r
+los &lt;- read.csv('~/Documents/Data/los.csv')
+loshours &lt;- los*24
+summary(loshours$los)
+```
+
+```
+##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+##    0.002   26.593   50.214  118.031  107.596 4153.740
+```
+
+
+&lt;img src="./img/los.png" width="95%" style="display: block; margin: auto;" /&gt;
+
 
 ---
 # Challenge 5: Irregularity (frequency)
 
 Various sampling frequency 
-- High: Electrocardiogram (ECG) (suffers from artifact corruption)
-- Medium: vitals, input, output
+- High: Electrocardiogram (ECG) 
+- Medium: vitals, input (e.g. medication), output (e.g. urination)
 - Low: lab tests, clinical notes (done by order)
 - Static: demographics, diagnosis
 
-(graph (heatmap? missing values?))
+Example: patient in MICU for 124 hours, selected **vital** and **lab test results**
+
+&lt;img src="./img/imgFreq.png" width="95%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+
+---
+### To sum up, challenges of EHR data
+
+
+- data usability 
+- lack of labels
+- multi-modality
+- unequal length
+- unequal frequency 
+- ...
+
+
+&lt;img src="./img/imgSam.jpg" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -223,7 +275,9 @@ Various sampling frequency
 
 Feature: a characteristic that helps with the modeling.
 
-Feature / Representation learning: techniques that make it easier to extract information when building predictive models 
+**Feature / Representation learning**: techniques that make it easier to extract information, eitehr to understand the data structure, or when building predictive models 
+
+--
 
 ### Motivations
 - Feature **Engineering** vs **Learning** 
@@ -232,7 +286,7 @@ Feature / Representation learning: techniques that make it easier to extract inf
   - visualization (clustering, e.g. *K-means*)
   - memory saving (in the early days, e.g. *symbolic aggregation*)
 
-- Precictive performance (? *Lasso*, *Autoencoder, RNN*)
+- Precictive performance (*Lasso*, *Autoencoder, RNN*)
   
 - Capture pattern from multiple modes such as time (*tensor*)
 
@@ -242,17 +296,20 @@ Feature / Representation learning: techniques that make it easier to extract inf
 ### Example 1: Autoencoder 
 
 Non probablistic, direct encoding: parametric map from input to representation
+&lt;img src="./img/imgAE.png" width="70%" style="display: block; margin: auto;" /&gt;
 
-**Encoder**: `\(h = f_\theta (x) = s_f (b + Wx)\)` 
+- **Encoder**: `\(h = f_\theta (x) = s_f (b + Wx)\)` 
+- **Decoder**: `\(g_\theta (h) = s_g (d + Wx)\)`
+  - Activation functions: linear, sigmoid, hyperbolic tangent 
+  
+  
+- Minimise **reconstruction** error: `\(L(x, g_\theta (f_\theta(x)))\)`
+  - Squared loss, binary cross-entropy loss
 
-**Decoder**: `\(g_\theta (h) = s_g (d + Wx)\)`
+--
 
-Minimise **reconstruction** error: `\(L(x, g_\theta (f_\theta(x)))\)`
-
-&lt;img src="./img/imgAE.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-
-
+- In some cases the 'bottle-neck' hidden layer is used as representation. 
+- Variations: Denoising AE, Sparse AE, Variational AE etc 
 
 ---
 ### Example 2: Tensor decomposition 
@@ -263,17 +320,42 @@ Tensor: multi-dimensional array
 - order 2: matrix
 - order 3: cube 
 
-(explain what is decomp and how it can be used as representation)
 
 
+### CP: CANDECOMP/PARAFAC 
+Express a tensor into a sum of finite number of rank-one tensors (i.e. can be written by the outer product of `\(N\)` vectors)
 
+
+&lt;img src="./img/imgCP.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+Factor matrices: combination of vectors `\(A = [\textbf{a}_1 \quad \textbf{a}_2... \textbf{a}_R ]\)`
 
 ---
-### Tensor decomp: application in computational phenotyping 
 
+### Tucker decomposition
+(Higher order SVD, N-mode PCA): a tensor into a core tensor multiplied by matrix along the sides; factor matrices are usually orthogonal
 
+&lt;img src="./img/imgTucker.png" width="50%" style="display: block; margin: auto;" /&gt;
 
+--
+### PARAFAC2
 
+&lt;img src="./img/imgPF2.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+Applications: phenotyping with varying measurements
+
+---
+
+### Application in computational phenotyping 
+
+**Phenotyping**: identify patients with certain characteristics of interest. As simple as Type 2 Diabetes
+
+Example: &lt;span style = 'color:maroon'&gt;(Ho 2014)&lt;/span&gt;
+
+&lt;img src="./img/imgTP.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+Phenotype interpretation: 
+&lt;img src="./img/imgTP2.png" width="40%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -282,59 +364,109 @@ Tensor: multi-dimensional array
 
 What is a good representation? 
 
-cite (Bengio 2014)
+&lt;span style = 'color:maroon'&gt;(Bengio 2014)&lt;/span&gt; Sparsity, temporal and spatial coherent, smoothness, ... 
 
-Simple: 
+--
+#### More practical standards:  
 
 - Representation themselves
-  - understand structure of data, such as visualisation 
+  - no standard metric, depend on the problems 
+  - custom metrics (e.g. 'Medical concept similarity measure'&lt;span style = 'color:maroon'&gt;(Choi 2016)&lt;/span&gt;)
+  - visualization (e.g. heatmap)
   
-- Prediction / classification performances
+- Classification performances
+
+  - AUC, accuracy, precision, recall, ... 
 
 
 
 
 ---
-# Back to MIMIC III data
+## Current project (using MIMIC data)
 
-Recall data characteristics: 
-- Temporal
-- Unevenly sampled, unequal length
-
-Objective: **predict in-hospital mortality**
-
-Pre-requisite: patient representation 
-
-Options
-
-1. LSTM AE (use Suresh 2018 paper for example)
-
-2. Our attempt: similarity tensor decomposition 
-
+#### Objective: 
+Investigate patient representation options, better representation means better accuracy in prediction of in-hospital mortality
 &lt;br&gt;
 .full-width[.content-box-yellow[Backstory: we were inspired by Suresh 2018 study, hence the objective and choice of inputs]]
 
+
+Options for representation
+
+1. LSTM AE (Suresh 2018 paper)
+
+2. Our experiment: feature similarity tensor decomposition 
+
+
 ---
 ## Long short term memory Autoencoder (LSTM AE)
-(insert pic from suresh 2018 paper)
+
+Suresh, Gong, Guttag 2018 Paper @ KDD: 
+
+**Learning Tasks for Multi-task Learning: Heterogenous Patient Population in ICU**
 
 Key idea: 
-- LSTM (complicated, once use Keras it's impossible to understand)
-- has some phenotyping ideas (link to a few other AE phenotyping paper)
+- Input: 29 variables (static and dynamic)
+- first 24 hours dynamic records
+- use LSTM AE to embed patient data from 3 modes: time, features, patient
+- predictive task: mortality at hour 36
 
+&lt;img src="./img/imgSuresh.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+---
 Choice of inputs: 
+
+&lt;img src="./img/imgFeatures.png" width="80%" style="display: block; margin: auto;" /&gt;
+
 
 
 #### Implementation: 
 
-keras + Gaussian mixture model (scikit learn)
+- Keras 
+- Input dimension: `n_samples * n_timesteps * n_features`
+- Embedded: `n_samples * n_latent` 
+    - (100, the elbow in reconstruction error curve on validation set)
+- Clusters: Gaussian mixture model, 3 clusters(for best performance)
+- Prediction: 
 
 #### Performance
-
+AUC &gt; 0.8 across different setups 
 
 ---
 ## Similarity tensor decomposition  
 (! testing stage! )
+
+Key ideas
+- utilise whole series, not only first 24 hours
+
+- deal with irregularity and missingness: **use feature similarity instead of individual series**
+
+  - natural cluster: better performance in personalized predictive tasks 
+  
+- Tensor decomposition on feature-similarity tensor
+
+- Representation: factor matrix 
+
+---
+## Feature similarity
+
+Trying out 2 things: 
+
+**SAX** (Symbolic Aggregate Approximation): raw time series into discrete symbols 
+
+  - Dimension reduction 
+
+
+**Dynamic Time Warping** 
+
+  - similarity measure for time series data
+  - computes the most optimal warping alignment path - unequal length!
+  - applications in TS clusterng / classification
+
+
+&lt;img src="./img/imgDTW.png" width="40%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
