@@ -43,3 +43,24 @@ qSelect <- 'SELECT * FROM admissions;'
 dbGetQuery(con, statement = qSelect)
 ```
 
+
+
+```R
+# nested list
+sepsis_day1_res$comp2$glm2$vecauc
+sepsis_day1_res$comp3$glm2$vecauc
+
+
+# magrittr
+sepsis_day1_res %>% length  # 14
+# same as length(sepsis_day1_res)
+
+# purrr::map
+allcomps <- map(sepsis_day1_res, function(x){x$glm2$vecauc})
+allcomps$comp2
+```
+
+
+
+
+
