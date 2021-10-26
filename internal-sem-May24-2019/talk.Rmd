@@ -71,6 +71,8 @@ class: middle
   - in-hospital mortality, <span style = 'color:maroon'>(Suresh 2018)</span>
   - Parkinson's disease stage <span style = 'color:maroon'>(Che 2017)</span>
 
+
+
 #### Medical professionals 
 - automate diagnosis
   - image evaluation: detect hip fracture from X-ray <span style = 'color:maroon'>(Gale 2017)</span>
@@ -107,7 +109,7 @@ knitr::include_graphics('./img/imgTopics.png')
 
 
 ---
-# Challenge 1: Avalability 
+# Challenge 1: Availability 
 
 ```{r echo = F, out.width='70%', fig.align='center'}
 knitr::include_graphics('./img/imgChallenge0.png')
@@ -311,7 +313,7 @@ knitr::include_graphics('./img/imgAE.png')
 ```
 
 - **Encoder**: $h = f_\theta (x) = s_f (b + Wx)$ 
-- **Decoder**: $g_\theta (h) = s_g (d + Wx)$
+- **Decoder**: $g_\theta (h) = s_g (d + W'h)$
   - Activation functions: linear, sigmoid, hyperbolic tangent 
   
   

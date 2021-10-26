@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 # Electronic Health Record data
 ## opportunities, challenges and feature learning
 ### Chi Zhang
-### 2019-05-23, internal seminar @ OCBE
+### 2019-05-24, internal seminar @ OCBE
 
 ---
 
@@ -67,6 +67,8 @@ class: middle
   - in-hospital mortality, &lt;span style = 'color:maroon'&gt;(Suresh 2018)&lt;/span&gt;
   - Parkinson's disease stage &lt;span style = 'color:maroon'&gt;(Che 2017)&lt;/span&gt;
 
+
+
 #### Medical professionals 
 - automate diagnosis
   - image evaluation: detect hip fracture from X-ray &lt;span style = 'color:maroon'&gt;(Gale 2017)&lt;/span&gt;
@@ -101,7 +103,7 @@ Number of Google Scholar publications relating to **deep EHR** until 2017 &lt;sp
 
 
 ---
-# Challenge 1: Avalability 
+# Challenge 1: Availability 
 
 &lt;img src="./img/imgChallenge0.png" width="70%" style="display: block; margin: auto;" /&gt;
 
@@ -298,7 +300,7 @@ Non probablistic, direct encoding: parametric map from input to representation
 &lt;img src="./img/imgAE.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 - **Encoder**: `\(h = f_\theta (x) = s_f (b + Wx)\)` 
-- **Decoder**: `\(g_\theta (h) = s_g (d + Wx)\)`
+- **Decoder**: `\(g_\theta (h) = s_g (d + W'h)\)`
   - Activation functions: linear, sigmoid, hyperbolic tangent 
   
   

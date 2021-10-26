@@ -38,3 +38,20 @@ at the YAML header, use `css: ['default', 'default-fonts', 'hygge']`
 ```
 
 will create nice boxes. 
+
+
+
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+solarized_light(
+  code_font_family = "Fira Code",
+  code_font_url = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css")
+
+```
+
