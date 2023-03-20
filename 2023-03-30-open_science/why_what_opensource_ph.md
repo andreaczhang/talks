@@ -1,8 +1,19 @@
+<span style = 'color:tomato'>Ideas</span> 
+
+- structure by before and after an epidemic 
+- the scope is only situational awareness; open source is also helpful in vaccine production
+
+
+
 # Why open source public health
 
 (Data, software separate; at least cover data)
 
 ## benefits 
+
+better to prevent before it happens, than finding solutions afterwards.
+
+
 
 
 
@@ -22,6 +33,8 @@ https://www.nature.com/articles/d41586-022-00792-2?utm_medium=Social&utm_campaig
 
 our world in data
 
+John hopkins data 
+
 
 
 ## Software
@@ -30,9 +43,11 @@ our world in data
 
 
 
-# Risk of open source
+# Risk and challenges of open source
 
 ## Data
+
+more political than technical 
 
 
 
