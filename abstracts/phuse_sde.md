@@ -22,19 +22,13 @@ real world data, electronic health records, exploration, quality control, tempor
 
 ### Abstract (150)
 
-Logic flow
+One step closer to better Electronic Health Records data
 
-- RWD has a more and more important role, as it provides information on how drugs are used, and are valuable for RWE
-- however, the data quality in RWD is not guaranteed
-- time series in nature 
-- a lot of focus has been on prediction models, now more on estimands
-- how do you draw good conclusion without understanding whether the data is good?
-- majority of time has been spent on understanding the data, however how data is recorded in EHR is highly situational, without collaborating with clinicians this is very difficult to know - should not blindly automate
-- 3 parts
-  - how much error there are (use references, and AHUS data), explain possible sources of errors: design flaw, fatigue, etc - with example of AB 
-  - these errors or things analysts don't know, on top of already messy mixed type EHR data
-  - present an open source tool for easy QC from the analysis side (not clician side) - not only temporal events ordering, but also some summaries to investigate missing, proportion etc 
-  - ?
+Real-World Data (RWD) like Electronic Health Records (EHR) is crucial for understanding drug usage and various treatments and generating Real-World Evidence (RWE). Risk prediction has been a major application where EHR is used, and there is now a shift towards causal inference, which requires data of even higher quality. Patients undergo treatments (drugs, procedures) at various times during their hospital stays, yet the data being recorded are messy and error-prone for various reasons. Analysts spend significant amount of time to sit together with clinicians to identify and understand abnormal records, and unfortunately this process is challenging to automate. 
+
+This talk will use an example on antibiotics prescription and use at a Nordic hospital to illustrate how some EHR systems can improve for better clinical decision-making and better data for research. I will also introduce a pilot R package (ggehr) that facilitates visual exploration of EHR data, and how it can help reconstruct patient journeys and enable analysts to perform effective quality control.
+
+
 
 
 
@@ -55,7 +49,5 @@ Logic flow
 
 
 
-Abstract max 150 (this paragraph below is 150 words)
 
-> Statisticians using multiple softwares (SAS, R, Python) will have found differences in analysis results that warrant further justification. Whilst some industries may accept results not being the same as long as they are "close", the highly regulated pharmaceutical industry would require an identical match in results. Yet, discrepancies might still occur, and knowing the reasons (different methods, options, algorithms etc) is critical to the modern statistician and subsequent regulatory submissions. In this talk I will introduce CAMIS: Comparing Analysis Method Implementations in Software (CAMIS). https://psiaims.github.io/CAMIS/ It is a joint-project between PHUSE, the R Validation Hub, PSI AIMS, R consortium and openstatsware. The aim of CAMIS is to investigate and document differences and similarities between different statistical softwares such as SAS and R. We use Quarto and Github to document methods, algorithms and comparisons between softwares through small case studies, and all articles are contributed by the community.
 
