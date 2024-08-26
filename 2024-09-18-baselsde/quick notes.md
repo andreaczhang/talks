@@ -55,3 +55,12 @@ local configuration
 
 
 vendor engagement 
+
+
+
+# useful links
+
+https://www.biostatistics.ca/real-world-evidence-rwe-and-real-world-data-rwd/
+
+https://patientsuseai.substack.com/p/field-note-using-ai-in-healthcare?triedRedirect=true
+
