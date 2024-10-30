@@ -8,3 +8,4 @@ Real-World Data (RWD) like Electronic Health Records (EHR) is crucial for unders
 
 I will introduce a new R package - ggehr, which is the extension of ggplot specifically developed for visual exploration of EHR data. The package facilitates visualization of temporal events (drug, procedure, operation) in combination with static information (demographics, admission info) at the patient level such that analysts can have an overview of the entire patient journey in one graph. I will also demonstrate how additional information (e.g. why this drugs is prescribed at time x) can be added interactively to enrich the visualization, making it easier to identify abnormal records and carry out quality control.
 
+https://youtu.be/uZLdiXm03jU
