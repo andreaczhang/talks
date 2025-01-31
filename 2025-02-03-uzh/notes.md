@@ -22,3 +22,65 @@ characteristics for pre-exposure prophylaxis and incidence of HIV and STI
 HIV, TB & emerging pathogens like covid 
 
 corona antibody study
+
+
+
+
+
+# Things to show
+
+Quarto dashboards https://quarto.org/docs/gallery/#dashboards
+
+My demo
+
+
+
+
+
+# About my projects
+
+
+
+
+
+## EHR
+
+
+
+## SP
+
+
+
+## Collaborations
+
+### Normomo / WHO / ECDC
+
+Statistician
+
+model
+
+roles 
+
+
+
+### NAV 
+
+
+
+### COVITA
+
+
+
+### Noreden / norkost
+
+
+
+### Other statistical studies 
+
+- propensity score
+- 
+
+
+
+
+
